@@ -1,5 +1,8 @@
 // in this file I've learn about Switch statement.
 
+//------------------------------------------------------------//
+//                      Switch Statement
+//------------------------------------------------------------//
 // const month = 2;
 // const month = 4;
 const month = 6;
