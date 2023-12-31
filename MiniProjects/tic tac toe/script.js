@@ -1,11 +1,21 @@
+/**
+ * this code is not working for winning pattern [ 0, 4, 8].
+ * and there is no Drow method. so write code for drow method.
+ */
+
 let btns = document.querySelectorAll(".btn")
+// console.log(btns);
 let resetBtn = document.querySelector("#reset-btn")
+let newgameBtn = document.querySelector("#newgame")
+let winMsg = document.querySelector("#result-box")
+// count is used for checking drow condition
+let count = 0;
 
 
 // we have two players : playerX, playerO
 let turnO = true;
 
-const winPettern = [
+const winpattern = [
     [0, 1, 2],
     [0, 2, 4],
     [0, 3, 6],
@@ -16,6 +26,19 @@ const winPettern = [
     [6, 7, 8]
 ]
 
+const resetGame = () => {
+    turnO = true
+    enableBoxes();
+    winMsg.style.display = "none"
+}
+
+// below function is written for enable button boxes after pressing reset or newgame button
+const enableBoxes = () => {
+    for (const box of btns) {
+        box.disabled = false;
+        box.innerHTML = ""
+    }
+}
 
 /**
  * here we add foreach() method on btns because it's an array of buttons which have class ".btn".
@@ -24,99 +47,143 @@ const winPettern = [
  */
 btns.forEach((box) => {
     box.addEventListener("click", () => {
-        console.log("box clicked");
+        // console.log("box clicked");
         if (turnO) {
-            box.innerHTML = "O"
-            box.st
+            box.innerText = "O"
+            box.style.color = "red"
             turnO = false
         }
-        else
-        {
-            box.innerHTML = "X"
+        else {
+            box.innerText = "X"
+            box.style.color = "green"
             turnO = true
         }
         box.disabled = true
 
+        count = count + 1;
         checkWin();
     })
 })
 
-//------------------------------------------------------------//
-//          Solving tic tac toe's 2D array confution
-//------------------------------------------------------------//
-// I'm solving this for below loop execution confution
-/**
- * In Tic Tac Toe there are total 8 pettern or combination of boxes in which ,
- *      when same symbol occur so the player of that symbol win the match.
- * there total 9 boxes and I have count these boxes from 0 to 8.
- * 
- * |-----------|----------|----------|
- * |     0     |    1     |     2    |
- * |-----------|----------|----------|
- * |     3     |    4     |     5    |
- * |-----------|----------|----------|
- * |     6     |    7     |     8    |
- * |-----------|----------|----------| 
- * 
- * so i am storing that combination of winnig petterns in an array.
- *      like,
- *  row petterns: 1st pettern:- [0,1,2]
- *                2st pettern:- [3,4,5]
- *                3st pettern:- [6,7,8]
- *  column petterns: 4st pettern:- [0,3,6]
- *                   5st pettern:- [1,4,7]
- *                   6st pettern:- [2,5,8]
- *  diagonal petterns: 7st pettern:- [0,1,2]
- *                     8st pettern:- [0,1,2]
- * 
- */
-
-// const checkWin = () => {
-//     for (const pettern of winPettern) {
-//         console.log(pettern);
-//         // console.log(btns[pettern[0]],btns[pettern[1]],btns[pettern[2]]);
-//     }
-// }
-// checkWin()
+// //------------------------------------------------------------//
+// //          Solving tic tac toe's 2D array confution
+// //------------------------------------------------------------//
+// // I'm solving this for below loop execution confution
 // /**
-//  * by runnig above code i've got this output.
-//  * output : 
-//  * [ 0, 1, 2 ]
-//    [ 0, 2, 4 ]
-//    [ 0, 3, 6 ]
-//    [ 1, 4, 7 ]
-//    [ 2, 4, 6 ]
-//    [ 2, 5, 8 ]
-//    [ 3, 4, 5 ]
-//    [ 6, 7, 8 ]
+//  * In Tic Tac Toe there are total 8 pattern or combination of boxes in which ,
+//  *      when same symbol occur so the player of that symbol win the match.
+//  * there total 9 boxes and I have count these boxes from 0 to 8.
+//  * 
+//  * |-----------|----------|----------|
+//  * |     0     |    1     |     2    |
+//  * |-----------|----------|----------|
+//  * |     3     |    4     |     5    |
+//  * |-----------|----------|----------|
+//  * |     6     |    7     |     8    |
+//  * |-----------|----------|----------| 
+//  * 
+//  * so i am storing that combination of winnig patterns in an array.
+//  *      like,
+//  *  row patterns: 1st pattern:- [0,1,2]
+//  *                2st pattern:- [3,4,5]
+//  *                3st pattern:- [6,7,8]
+//  *  column patterns: 4st pattern:- [0,3,6]
+//  *                   5st pattern:- [1,4,7]
+//  *                   6st pattern:- [2,5,8]
+//  *  diagonal patterns: 7st pattern:- [0,1,2]
+//  *                     8st pattern:- [0,1,2]
+//  * 
 //  */
 
+// // const checkWin = () => {
+// //     for (const pattern of winpattern) {
+// //         console.log(pattern);
+// //         // console.log(btns[pattern[0]],btns[pattern[1]],btns[pattern[2]]);
+// //     }
+// // }
+// // checkWin()
+// // /**
+// //  * by runnig above code i've got this output.
+// //  * output : 
+// //  * [ 0, 1, 2 ]
+// //    [ 0, 2, 4 ]
+// //    [ 0, 3, 6 ]
+// //    [ 1, 4, 7 ]
+// //    [ 2, 4, 6 ]
+// //    [ 2, 5, 8 ]
+// //    [ 3, 4, 5 ]
+// //    [ 6, 7, 8 ]
+// //  */
 
-/**
- * using below forOF() loop i'm printing elements inside of each array.
- * here "pettern" refers to each sub array in side the winPetterns array.
- * by using "pettern" we can access each subarray inside of the winPetterns array.
- *  - now if we write like this "pettern[index_of_subarray]" we can access values inside of each subarray one by one when loop iterate.
- *      - for example : pettern[0] will print first subarray's first element. (here, which is 0) 
- *                      pettern[1] will print second subarray's first element. (here, which is 1) 
- *                      pettern[2] will print third subarray's first element. (here, which is 2) 
- * now loop value increase pettern points to second sub array,
- *      - for example : pettern[0] will print first subarray's first element. (here, which is 0) 
- *                      pettern[1] will print second subarray's first element. (here, which is 2) 
- *                      pettern[2] will print third subarray's first element. (here, which is 4) 
- */
+
+// /**
+//  * using below forOF() loop i'm printing elements inside of each array.
+//  * here "pattern" refers to each sub array in side the winpatterns array.
+//  * by using "pattern" we can access each subarray inside of the winpatterns array.
+//  *  - now if we write like this "pattern[index_of_subarray]" we can access values inside of each subarray one by one when loop iterate.
+//  *      - for example : pattern[0] will print first subarray's first element. (here, which is 0) 
+//  *                      pattern[1] will print second subarray's first element. (here, which is 1) 
+//  *                      pattern[2] will print third subarray's first element. (here, which is 2) 
+//  * now loop value increase pattern points to second sub array,
+//  *      - for example : pattern[0] will print first subarray's first element. (here, which is 0) 
+//  *                      pattern[1] will print second subarray's first element. (here, which is 2) 
+//  *                      pattern[2] will print third subarray's first element. (here, which is 4) 
+//  */
+// // const checkWin = () => {
+// //     for (const pattern of winpattern) {
+// //         console.log(pattern[0],pattern[1],pattern[2]);
+// //         // console.log(btns[pattern[0]],btns[pattern[1]],btns[pattern[2]]);
+// //     }
+// // }
+// // checkWin()
+
+// this loop explain about how we get position of btn and then its value
 // const checkWin = () => {
-//     for (const pettern of winPettern) {
-//         console.log(pettern[0],pettern[1],pettern[2]);
-//         // console.log(btns[pettern[0]],btns[pettern[1]],btns[pettern[2]]);
+//     for (const pattern of winpattern) {
+//         console.log(pattern[0], pattern[1], pattern[2]);
+//         console.log(
+//             btns[pattern[0]].innerHTML,
+//             btns[pattern[1]].innerHTML,
+//             btns[pattern[2]].innerHTML
+//         );
+
+//         let position1value = btns[pattern[0]].innerText;
+//         let position2value = btns[pattern[2]].innerText;
+//         let position3value = btns[pattern[3]].innerText;
 //     }
 // }
-// checkWin()
 
 
-const checkWin = () => {
-    for (const pettern of winPettern) {
-        console.log(pettern[0],pettern[1],pettern[2]);
-        // console.log(btns[pettern[0]],btns[pettern[1]],btns[pettern[2]]);
+// below function is written for disable button boxes after winning the match
+const disableBoxes = () => {
+    for (const box of btns) {
+        box.disabled = true;
     }
 }
+
+
+
+// below function is written for showing winner
+const showWinner = (winner) => {
+    winMsg.style.display = "block"
+    winMsg.innerHTML = `Winner is    ${winner}`
+    disableBoxes();
+}
+
+const checkWin = () => {
+    for (const pattern of winpattern) {
+        let position1value = btns[pattern[0]].innerHTML
+        let position2value = btns[pattern[1]].innerHTML
+        let position3value = btns[pattern[2]].innerHTML
+
+        if (position1value !== "" && position2value !== "" && position3value !== "") {
+            if (position1value === position2value && position2value === position3value) {
+                // console.log("winner", position1value);
+                showWinner(position1value);
+            }
+        }
+    }
+}
+
+newgameBtn.addEventListener("click", resetGame);
+resetBtn.addEventListener("click", resetGame);
