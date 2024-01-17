@@ -1,6 +1,8 @@
 /**
  * this code is not working for winning pattern [ 0, 4, 8].
  * and there is no Drow method. so write code for drow method.
+ *
+ * https://g.co/bard/share/488ab0d1d3ac
  */
 
 let btns = document.querySelectorAll(".btn")
@@ -148,8 +150,8 @@ btns.forEach((box) => {
 //         );
 
 //         let position1value = btns[pattern[0]].innerText;
-//         let position2value = btns[pattern[2]].innerText;
-//         let position3value = btns[pattern[3]].innerText;
+//         let position2value = btns[pattern[1]].innerText;
+//         let position3value = btns[pattern[2]].innerText;
 //     }
 // }
 
@@ -170,20 +172,52 @@ const showWinner = (winner) => {
     disableBoxes();
 }
 
-const checkWin = () => {
-    for (const pattern of winpattern) {
-        let position1value = btns[pattern[0]].innerHTML
-        let position2value = btns[pattern[1]].innerHTML
-        let position3value = btns[pattern[2]].innerHTML
+// this is my checkwin function
+// const checkWin = () => {
+//     for (const pattern of winpattern) {
+//         let position1value = btns[pattern[0]].innerHTML
+//         let position2value = btns[pattern[1]].innerHTML
+//         let position3value = btns[pattern[2]].innerHTML
 
-        if (position1value !== "" && position2value !== "" && position3value !== "") {
-            if (position1value === position2value && position2value === position3value) {
-                // console.log("winner", position1value);
-                showWinner(position1value);
-            }
+//         if (position1value !== "" && position2value !== "" && position3value !== "") {
+//             if (position1value === position2value && position2value === position3value) {
+//                 // console.log("winner", position1value);
+//                 showWinner(position1value);
+//             }
+//         }
+//     }
+// }
+
+// this is bardAI's updated checkwin function
+const checkWin = () => {
+    let showWinnerCalled = false; // Flag to avoid redundant calls
+  
+    for (const pattern of winpattern) {
+      let position1value = btns[pattern[0]].innerHTML;
+      let position2value = btns[pattern[1]].innerHTML;
+      let position3value = btns[pattern[2]]; // Corrected from pattern[3]
+  
+      if (
+        position1value !== "" &&
+        position2value !== "" &&
+        position3value !== ""
+      ) {
+        if (
+          position1value === position2value &&
+          position2value === position3value
+        ) {
+          showWinner(position1value);
+          showWinnerCalled = true; // Set flag
+          break; // Exit the loop if a winner is found
         }
+      }
     }
-}
+  
+    if (!showWinnerCalled) {
+      checkDraw();
+    }
+  };
+  
 
 newgameBtn.addEventListener("click", resetGame);
 resetBtn.addEventListener("click", resetGame);

@@ -1,8 +1,8 @@
 // In this file I've learn about foreach().
 /**
  * - Foreach() on Array
- *  - using regular function
- *  - using Arrow function
+ *    - using regular function
+ *    - using Arrow function
  * - Passing other function in foreach()
  * - Callback function can accept Multiple parameters
  * - appling foreach() on Objects in Array
