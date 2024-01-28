@@ -173,50 +173,50 @@ const showWinner = (winner) => {
 }
 
 // this is my checkwin function
-// const checkWin = () => {
-//     for (const pattern of winpattern) {
-//         let position1value = btns[pattern[0]].innerHTML
-//         let position2value = btns[pattern[1]].innerHTML
-//         let position3value = btns[pattern[2]].innerHTML
-
-//         if (position1value !== "" && position2value !== "" && position3value !== "") {
-//             if (position1value === position2value && position2value === position3value) {
-//                 // console.log("winner", position1value);
-//                 showWinner(position1value);
-//             }
-//         }
-//     }
-// }
-
-// this is bardAI's updated checkwin function
 const checkWin = () => {
-    let showWinnerCalled = false; // Flag to avoid redundant calls
-  
     for (const pattern of winpattern) {
-      let position1value = btns[pattern[0]].innerHTML;
-      let position2value = btns[pattern[1]].innerHTML;
-      let position3value = btns[pattern[2]]; // Corrected from pattern[3]
-  
-      if (
-        position1value !== "" &&
-        position2value !== "" &&
-        position3value !== ""
-      ) {
-        if (
-          position1value === position2value &&
-          position2value === position3value
-        ) {
-          showWinner(position1value);
-          showWinnerCalled = true; // Set flag
-          break; // Exit the loop if a winner is found
+        let position1value = btns[pattern[0]].innerHTML
+        let position2value = btns[pattern[1]].innerHTML
+        let position3value = btns[pattern[2]].innerHTML
+
+        if (position1value !== "" && position2value !== "" && position3value !== "") {
+            if (position1value === position2value && position2value === position3value) {
+                // console.log("winner", position1value);
+                showWinner(position1value);
+            }
         }
-      }
     }
+}
+
+// // this is bardAI's updated checkwin function
+// const checkWin = () => {
+//     let showWinnerCalled = false; // Flag to avoid redundant calls
   
-    if (!showWinnerCalled) {
-      checkDraw();
-    }
-  };
+//     for (const pattern of winpattern) {
+//       let position1value = btns[pattern[0]].innerHTML;
+//       let position2value = btns[pattern[1]].innerHTML;
+//       let position3value = btns[pattern[2]]; // Corrected from pattern[3]
+  
+//       if (
+//         position1value !== "" &&
+//         position2value !== "" &&
+//         position3value !== ""
+//       ) {
+//         if (
+//           position1value === position2value &&
+//           position2value === position3value
+//         ) {
+//           showWinner(position1value);
+//           showWinnerCalled = true; // Set flag
+//           break; // Exit the loop if a winner is found
+//         }
+//       }
+//     }
+  
+//     if (!showWinnerCalled) {
+//       checkDraw();
+//     }
+//   };
   
 
 newgameBtn.addEventListener("click", resetGame);

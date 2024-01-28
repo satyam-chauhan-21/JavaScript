@@ -1,0 +1,21 @@
+// i've search this about lexical environment on google generative AI
+
+        In JavaScript, a lexical environment is a data structure that stores all the variables and function declarations 
+within a program. It allows the interpreter to recognize which variables or functions are accessible in different 
+scopes within your program.
+
+A lexical environment consists of two components:
+        An environment record: This is an object that stores the variables and functions that are declared within 
+the current lexical environment.
+        A reference to the outer environment: This is a pointer to the lexical environment of the surrounding function.
+        The lexical environment is created when a function is called and destroyed when the function returns. 
+The lexical environment is used to resolve variable names. For example, if you have a function called outer() 
+that defines a variable called x, and then you call a function called inner() from within outer(), the lexical 
+environment of inner() will contain the variable x from outer().
+        This is because the lexical environment of inner() is created when inner() is called, and at that time, 
+the function outer() is still in scope. Therefore, the lexical environment of inner() contains all of the variables
+and functions that are declared in outer(), as well as all of the variables and functions that are declared in the 
+global scope.
+        The lexical environment is a powerful feature of JavaScript that allows you to write code that is more 
+readable and maintainable. By using the lexical environment, you can avoid having to pass variables around between 
+functions, and you can make sure that your code is always using the most up-to-date values for variables.
