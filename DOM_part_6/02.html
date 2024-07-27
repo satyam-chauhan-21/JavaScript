@@ -1,0 +1,71 @@
+<!-- In thi file I've learn about how to add and remove element from DOM using JS -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="main_ul">
+        <li>Java</li>
+    </ul>
+</body>
+<script>
+    //-----------------------------------------------------//
+    //                 Adding New elements
+    //-----------------------------------------------------//
+    // for adding element we create a function to that we don't write too much code
+
+    // in this function we don't travarse the whole DOM tree
+    function addLiElementOfLang_OptimiseWay(langName) {
+        const li = document.createElement('li');
+        const text = document.createTextNode(langName);
+        li.appendChild(text);
+        // we can also write above two line like this 
+        // li.appendChild(document.createTextNode(langName));
+
+        // li.innerHTML = `${langName}`;
+        document.querySelector('.main_ul').appendChild(li);
+    }
+    addLiElementOfLang_OptimiseWay("JavaScript");
+    addLiElementOfLang_OptimiseWay("C++");
+    addLiElementOfLang_OptimiseWay("C");
+
+    // // BUT, in this function we travarse the whole DOM tree because of 'innerHTML' line
+    // function addLiElementOfLang(langName) {
+    //     const li = document.createElement('li');
+    //     // const text = document.createTextNode(langName);
+    //     // li.appendChild(text);
+    //     li.innerHTML = `${langName}`;
+    //     document.querySelector('.main_ul').appendChild(li);
+    // }
+
+    // addLiElementOfLang("python");
+
+
+    //-----------------------------------------------------//
+    //             Editing of existing elements
+    //-----------------------------------------------------//
+
+    // for that first we grab that element 
+    const old_ele = document.querySelector('li:nth-child(2)');
+    // now we create whole new 'li' element 
+    const new_li = document.createElement('li');
+    new_li.textContent = "Python"
+    // now we replace whole old element with new element
+    old_ele.replaceWith(new_li)
+
+    // another method for editing element
+    const first_ele = document.querySelector('li:first-child');
+    first_ele.outerHTML = "<li>Rust</li>"
+
+    //-----------------------------------------------------//
+    //             Editing of existing elements
+    //-----------------------------------------------------//
+
+    const last_ele = document.querySelector('li:last-child');
+    last_ele.remove();
+
+</script>
+</html>

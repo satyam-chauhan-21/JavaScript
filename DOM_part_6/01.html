@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background: #353535;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="first" class="first_div">
+        <h1 class="first_heading">
+            Heading 1
+        </h1>
+        <h2 class="sec_heading">
+            Heading 2                                 
+        </h2>
+        <h3 class="third_heading">
+            Heading 3
+        </h3>
+    </div>
+    <script>
+        // let main_div = document.getElementById('first');
+        // console.log(main_div);
+        // console.log(main_div.id); // output : fisrt
+        // console.log(main_div.className); // output : first_div
+
+        // // getting attributes from elements using getAttributes() methods
+        // console.log(main_div.getAttribute('id')); // output : fisrt
+        // console.log(main_div.getAttribute('class')); // output : first_div
+
+        // // setting attributes from elements using setAttributes() methods
+        // main_div.setAttribute('class', 'main_div') // this line will override the previous class name. so we have to write like this,
+        // main_div.setAttribute('class', 'first_div main_div')
+
+        //--------------------------------------------------------------------------------//
+        
+        // let parent = document.querySelector('.first_div');
+        // console.log(parent);
+        // console.log(parent.children); // will return a HTMLcollection
+        // console.log(parent.children[0].innerHTML);
+        
+        // for (let i = 0; i < parent.children.length; i++) {
+            //     console.log(parent.children[i].innerHTML);
+            // }
+            
+        //--------------------------------------------------------------------------------//
+
+        // creating a new element and add it in the document tree
+
+        const div = document.createElement('div');
+        // div.id = "myID"
+        div.setAttribute('id', 'myID');
+        div.setAttribute('class', 'myClass1 myClass2');
+        div.style.backgroundColor = "red";
+        div.style.padding = "10px";
+        /* ye innerText value ko override karta hai means value ka reference pehle leke ayega and then override kar dega BUT, ye jo setAttribute hai or ye jo hamne textNode create kiya hai ye direct value ko set kar deta hai jisse reference leke aane ka round bachta hai or code more efficient hota hai. */
+        // in below line we travarse the whole DOM tree because of 'innerHTML'
+        // div.innerText = "Khushi";
+
+        // BUT, in below line we don't travarse the whole DOM tree
+        const textNode = document.createTextNode("Malik");
+        div.appendChild(textNode);
+        
+        document.querySelector('.third_heading').append(div)
+
+
+    </script>
+</body>
+
+</html>
