@@ -94,3 +94,13 @@ newdate4.toLocaleString('default',{
 
 console.log(newdate4.toLocaleDateString());
 */
+
+
+/*
+Measuring time elapsed:
+You can use Date.now() to get the current time in milliseconds, then subtract a previous time to find out how much time elapsed between the two calls.
+
+const start = Date.now();
+doSomeLongRunningProcess();
+console.log(`Time elapsed: ${Date.now() - start} ms`);
+*/
