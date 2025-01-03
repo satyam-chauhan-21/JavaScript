@@ -1,0 +1,132 @@
+<!-- in this document
+what is addeventListener() ?
+it's parameters ?
+for propagation read in event.js
+stop propagation()
+preventDefault()
+doingSomething => eventSpillOver
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="photoshop"
+                    src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt="photoshop"></li>
+            <li><img width="200px" id="japan"
+                    src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="river"
+                    src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="owl"
+                    src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="prayer"
+                    src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+    // // hame ye tarike se nahi likhana chahiye kyo ki ye tarika hame jyada functionalities provide nahi karta iske badle hame event listeners ka use karna chahiye kyoki vo hame propegation jaisi functionalities provide karta hai
+    // document.getElementById('owl').onclick = function() {
+    //     alert('hello')
+    // }
+
+    // // so ye tarika sabse sahi hai event use karne ka.event listeners ke baare me net par padh lena
+    // document.getElementById('owl').addEventListener('click',function() {
+    //     alert('owl clicked')
+    // })
+
+//----------------------------------------------------------------------------------//
+//           addEventListener('event', function(eventObject), true/false)
+//----------------------------------------------------------------------------------//
+// attechEvent() and jQuery - on ,, ye dono tarike se old time me event use karte the
+
+// event 2 type ke hote hai browser and environment event.
+/* environment events: In JavaScript, environment events are signals or notifications about changes or occurrences within the browser or the system's environment. These events allow JavaScript code to react to various situations and user interactions. They are fundamental for creating dynamic and interactive web applications.
+
+Environment events can be broadly categorized into: 
+User Interface Events:
+Document and Window Events:
+Form Events:
+Media Events:
+Error Events:
+Event Handling:
+*/
+
+// https://www.w3schools.com/js/js_htmldom_eventlistener.asp
+// https://www.w3schools.com/js/tryit.asp?filename=tryjs_addeventlistener_usecapture
+
+//----------------------------------------------------------------------------------//
+//                                stopPropagation()
+//----------------------------------------------------------------------------------//
+
+// document.getElementById('images').addEventListener('click',function(e) {
+//     alert('clicked inside the ul')
+// },false)
+
+// document.getElementById('owl').addEventListener('click',function(e) {
+//     alert('owl clicked')
+//     e.stopPropagation()
+// },false)
+
+//----------------------------------------------------------------------------------//
+//                                preventDefault()
+//----------------------------------------------------------------------------------//
+
+// document.getElementById('google').addEventListener('click', function(e) {
+//     console.log('gooogle clicked');
+//     e.preventDefault()
+// })
+
+//----------------------------------------------------------------------------------//
+//                                doingSomething
+//----------------------------------------------------------------------------------//
+
+/* =>hame ye karna hai ki if ham koi bhi image par click kare to vo image gayab ho jaye.
+=>to useke liye hame sabse pehle uss image ko select karna hoga.
+=>but ham ek-ek karke saari image ko id dene to nahi beth skte kyo abhi hamare paas kam images hai to ham ye kar skte hai but if hamare paas 100 to 1000 image hogi to ek kaam dificult ho jayega.
+=>isiliye yaha hamne pura image jisme hai vo "ul" hi select kar liya.
+*/
+document.querySelector('#images').addEventListener('click', function(e){
+    // // // ab iss pure 'ul' mese ek ek image ko nikalna padega jiske liye ham 'target' kause kar skte hai
+    // // console.log(e.target) // isse hame 'img' tag mil raha hai but if ham isse gayab karenge to 'li' ke dot point reh jayenge. to hame pura 'li' hi select karna hoga.
+    // // to uske liye ham uper likhe hue se 'li' nikal skte hai.
+    // console.log(e.target.parentNode);
+    // let removeImg = e.target.parentNode;
+    // // removeImg.style.display = none; // yaha iss method me error aa raha hai kyoki ese hum only jab koi element ko sidhe sidhe pakd rahe ho tab hi likh skte hai
+    // // like: document.getElementById("myDIV").style.display = "none";
+    // // but yaha hame remove() ka use karenege
+    // removeImg.remove()
+
+    // // // another method
+    // // removeImg.parentNode.removeChild(removeImg) // yaha hamne "removeImg" ke parent ko pakda fir usse uske child ko remove karaya joki "removeImg" means "e.target.parentNode" ye hoga.
+
+
+    // ab yaha per ek bug hai if hum 'li' par bhi click karenge to pura list hi gayab ho ja rha hai.
+    // kyoki hamne 'ul' ko select kiya hai to vo usme click hue element ko target karega joki 'li' ke case me 'li' khud hoga then uske parent ko pakdega joki 'ul' hoga so ese 'removeImg' me 'ul' store ho jayega and then vo remove ho jayega.
+    // to usse rokne ke liye ham 'tagName' ka use karenge
+    if (e.target.tagName === 'IMG') {
+        let removeImg = e.target.parentNode // no problem solved
+        removeImg.remove()
+    }
+
+    // hamari ye jo problem ho rahi thi is called 'event spill over'.
+
+}, false)
+
+
+</script>
+</html>
