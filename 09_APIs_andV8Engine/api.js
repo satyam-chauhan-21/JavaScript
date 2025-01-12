@@ -13,6 +13,8 @@
 // Instance method: send()
 // Event: readystatechange
 // got the data
+// Extracting the meaning full data
+
 
 
 //-----------------------------------------------------------------------------------------------------------//
@@ -258,6 +260,40 @@
 // }
 // xhr.send()
 // so ab itna code likh kar hame "https://api.github.com/users/hiteshchoudhary" iss API ka data mil rha hai
+
+
+//----------------------------------------------------------//
+//             Extracting the meaning full data
+//----------------------------------------------------------//
+// now hame jo data mil hara 
+
+// const xhr = new XMLHttpRequest()
+// const requestURL = 'https://api.github.com/users/hiteshchoudhary'
+// xhr.open('GET', requestURL)
+// xhr.onreadystatechange = function(){
+//     if (this.readyState === 4) {
+//         const data = this.responseText
+//         console.log(data.followers); // this giving output: undefined 
+//     }
+// }
+// xhr.send()
+
+// now yaha per hame "undefined" issliye mil raha hai kyoki hame jo "this.responseText" mila hai uska type string hai & ham uss string ko JS ka object smj kar usme se "followers" nikal rahe hai jo ki possible nahi hai.
+// kyoki yaha per hame string ki format me data mila hai so usko ham pehle JSON format me convert karenge then usme se data extract karenge.
+
+// const xhr = new XMLHttpRequest()
+// const requestURL = 'https://api.github.com/users/hiteshchoudhary'
+// xhr.open('GET', requestURL)
+// xhr.onreadystatechange = function(){
+//     if (this.readyState === 4) {
+//         const data = JSON.parse(this.responseText)
+//         console.log(data.name); // this giving output: Hitesh Choudhary
+//     }
+// }
+// xhr.send()
+// so problem solved.
+
+
 
 document.getElementById('stop').addEventListener('click', function() {
     document.querySelector('div').innerHTML = "Main API Sheekh Li &#128513; &#128516; &#128522; &#128521; &#128526;"
