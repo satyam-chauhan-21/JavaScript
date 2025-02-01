@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>yaha closure ka real world example diya hai. jisse ham baad me search kar ke samjh lenge.</p>
+    <button id="orange">Orenge</button>
+    <button id="green">Green</button>
+</body>
+<script>
+    // // so niche ke code se hamne bohot saari buttons create kar li hai.
+    // function myFunction() {
+    //     var x = document.createElement("BUTTON");
+    //     var t = document.createTextNode("Click me");
+    //     x.appendChild(t);
+    //     document.body.appendChild(x);
+    // }
+    // for (let i = 1; i <= 500; i++) {
+    //     myFunction()
+    // }
+
+    
+    function clickHandler(color) {
+        // document.body.style.backgroundColor = `${color}`
+        return function(){
+            document.body.style.backgroundColor = `${color}`
+
+        }
+    }
+    document.querySelector('#orange').onclick = clickHandler('orange')
+    document.querySelector('#green').onclick = clickHandler('green')
+</script>
+
+</html>
