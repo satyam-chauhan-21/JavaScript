@@ -172,6 +172,14 @@ const showWinner = (winner) => {
     disableBoxes();
 }
 
+
+// this function for showing draw if no one win
+const matchDraw = () => {
+    winMsg.style.display = "block"
+    winMsg.innerHTML = `Match Draw`
+    disableBoxes();
+}
+
 // this is my checkwin function
 const checkWin = () => {
     for (const pattern of winpattern) {
@@ -180,10 +188,16 @@ const checkWin = () => {
         let position3value = btns[pattern[2]].innerHTML
 
         if (position1value !== "" && position2value !== "" && position3value !== "") {
+            // if upper and niche vali constion true hongi to winner show vala function call ho jayega/
             if (position1value === position2value && position2value === position3value) {
                 // console.log("winner", position1value);
                 showWinner(position1value);
             }
+            // // if upper vali constion true nahi huyi to matchDraw function call hoga
+            // else{
+            //     matchDraw()
+            // } 
+            // // ye upper vala logic to kaam nahi kar raha hai.
         }
     }
 }
