@@ -1,0 +1,17 @@
+{
+  "name": "coloringtext_js",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "coloringTextIn.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "inquirer": "^12.4.1"
+  }
+}
