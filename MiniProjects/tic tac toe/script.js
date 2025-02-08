@@ -19,7 +19,8 @@ let turnO = true;
 
 const winpattern = [
     [0, 1, 2],
-    [0, 2, 4],
+    // [0, 2, 4],// ye mene wrong pattern likh di thi isliye niche vali pattern par win nahi show kar raha tha.
+    [0, 4, 8],
     [0, 3, 6],
     [1, 4, 7],
     [2, 4, 6],
@@ -108,7 +109,7 @@ btns.forEach((box) => {
 // //  * by runnig above code i've got this output.
 // //  * output : 
 // //  * [ 0, 1, 2 ]
-// //    [ 0, 2, 4 ]
+// //    [ 0, 4, 8 ]
 // //    [ 0, 3, 6 ]
 // //    [ 1, 4, 7 ]
 // //    [ 2, 4, 6 ]
